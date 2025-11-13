@@ -14,6 +14,7 @@ namespace BAGACHi
     {
         public Bagachi()
         {
+            ControlExtension.Draggable(this, true);
             InitializeComponent();
             timer1.Start();
         }
@@ -31,12 +32,14 @@ namespace BAGACHi
                 timer1.Stop();
                 //Log in form
                 logInPanel.Visible = true;
-                logInPanel.Size = new Size(300, 200);
                 loadingSceenLogo.Visible = false;
-                loadingSceenLogo.Size = new Size(0, 0);
                 //this.Hide();
             }
         }
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
