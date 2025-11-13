@@ -41,5 +41,17 @@ namespace BAGACHi
         {
 
         }
+
+        private void logBtn_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void logBtn_Click_1(object sender, EventArgs e)
+        {
+            MainMenu main = new MainMenu();
+            main.Show();
+            this.Hide();
+        }
     }
 }

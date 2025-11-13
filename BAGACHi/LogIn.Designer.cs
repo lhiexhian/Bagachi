@@ -38,9 +38,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.logInPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.logBtn = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.loadingSceenLogo = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.progBar.SuspendLayout();
             this.logInPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.loadingSceenLogo)).BeginInit();
@@ -121,7 +121,7 @@
             this.logInPanel.Controls.Add(this.textBox1);
             this.logInPanel.Controls.Add(this.label2);
             this.logInPanel.Controls.Add(this.textBox2);
-            this.logInPanel.Controls.Add(this.button1);
+            this.logInPanel.Controls.Add(this.logBtn);
             this.logInPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.logInPanel.Location = new System.Drawing.Point(237, 95);
             this.logInPanel.MaximumSize = new System.Drawing.Size(300, 200);
@@ -129,6 +129,23 @@
             this.logInPanel.Padding = new System.Windows.Forms.Padding(20);
             this.logInPanel.Size = new System.Drawing.Size(300, 200);
             this.logInPanel.TabIndex = 5;
+            // 
+            // logBtn
+            // 
+            this.logBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.logBtn.BackColor = System.Drawing.Color.Transparent;
+            this.logBtn.BackgroundImage = global::BAGACHi.Properties.Resources.btnBG;
+            this.logBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.logBtn.FlatAppearance.BorderSize = 0;
+            this.logBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logBtn.Location = new System.Drawing.Point(108, 142);
+            this.logBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.logBtn.Name = "logBtn";
+            this.logBtn.Size = new System.Drawing.Size(84, 36);
+            this.logBtn.TabIndex = 0;
+            this.logBtn.Text = "button1";
+            this.logBtn.UseVisualStyleBackColor = false;
+            this.logBtn.Click += new System.EventHandler(this.logBtn_Click_1);
             // 
             // notifyIcon1
             // 
@@ -151,22 +168,6 @@
             this.loadingSceenLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.loadingSceenLogo.TabIndex = 6;
             this.loadingSceenLogo.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::BAGACHi.Properties.Resources.btnBG;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(108, 142);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // Bagachi
             // 
@@ -196,7 +197,7 @@
         private System.Windows.Forms.Panel progBar;
         private System.Windows.Forms.Panel prog;
         private System.Windows.Forms.PictureBox loadingSceenLogo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button logBtn;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
