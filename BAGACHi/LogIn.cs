@@ -14,7 +14,7 @@ namespace BAGACHi
     {
         public Bagachi()
         {
-            ControlExtension.Draggable(this, true);
+            //ControlExtension.Draggable(this, true);
             InitializeComponent();
             timer1.Start();
         }
