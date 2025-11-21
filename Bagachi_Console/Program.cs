@@ -180,6 +180,11 @@ namespace Bagachi_Console
                         break;
                 }
             }
+
+
+
+
+            //TO DO: attack system, mining, click events
         }
     }
 }
