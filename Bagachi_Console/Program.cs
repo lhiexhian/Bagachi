@@ -1,7 +1,9 @@
 ﻿using System;
 using static System.Console;
+using static System.Math;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
+using System.Threading;
 
 namespace Bagachi_Console
 {
@@ -30,11 +32,64 @@ namespace Bagachi_Console
                     //Check credentials from database
                     WriteLine("Login successful. Welcome back, " + username + "!");
                     ReadLine(); // Pause before clearing
-                    MainMenu();
+                    InitialMenu();
                     break;
                 }
             }
+        }
+        static void InitialMenu()
+        {
+            Clear();
+            string[] menu = new string[3];
+            menu[0] = "LOG IN";
+            menu[1] = "REGISTER";
+            menu[2] = "EXIT";
 
+            int focus = 0;
+
+            while (true)
+            {
+                //Clear();
+                SetCursorPosition(0, 0);
+                WriteLine("==BAGACHI==");
+                for (int i = 0; i < menu.Length; i++)
+                {
+                    if (i == focus)
+                    {
+                        WriteLine($"> {menu[i]} <");
+                    }
+                    else
+                    {
+                        WriteLine($"  {menu[i]}  ");
+                    }
+                }
+                WriteLine("\n>>Use UP and DOWN arrow keys to navigate, ENTER for selection.<<");
+                var key = ReadKey(true).Key;
+                if (key == ConsoleKey.UpArrow)
+                {
+                    focus = (focus - 1 + menu.Length) % menu.Length;
+                }
+                else if (key == ConsoleKey.DownArrow)
+                {
+                    focus = (focus + 1) % menu.Length;
+                }
+                else if (key == ConsoleKey.Enter)
+                {
+                    switch (focus)
+                    {
+                        case 0:
+                            LogIn();
+                            return;
+                        case 1:
+                            Register();
+                            return;
+                        case 2:
+                            Environment.Exit(0);
+                            break;
+                    }
+                }
+                Thread.Sleep(10);
+            }
         }
         static string FirstBagachiGen(int seed)
         {
@@ -55,42 +110,14 @@ namespace Bagachi_Console
             //enter logic (just incase yk) to avoid duplicate bagachi ID from database here
             return BagID;
         }
-        static string BagachiType(string petID)
-        {
-            string temp = petID[0].ToString();
-            string type;
-
-            switch (temp)
-            {
-                case "0":
-                    type = "FIGHTER";
-                    break;
-                case "1":
-                    type = "WIZARD";
-                    break;
-                case "2":
-                    type = "THIEF";
-                    break;
-                case "3":
-                    type = "GUARDIAN";
-                    break;
-                case "4":
-                    type = "HEALER";
-                    break;
-                default:
-                    type = "INVALID BAGACHI";
-                    break;
-            }
-
-            return type;
-        }
+        
 
 
 
         static void Register()
         {
             Clear();
-            string username, password, email;
+            string username, password;
             WriteLine("==REGISTER==");
             Write(">> Username: ");
             username = ReadLine();
@@ -102,14 +129,12 @@ namespace Bagachi_Console
                 WriteLine("Registration successful. You can now log in, " + username + "!\n");
                 int accSeed = rseed.Next(1000, 9999);
                 string bagachiID = FirstBagachiGen(accSeed);
-
-                string bagaType = BagachiType(bagachiID);
                 WriteLine(">> Click anywhere to continue...");
                 ReadLine(); // Pause before clearing
-                Clear();
-                WriteLine("Congratsss! Your First Bagachi is: " + bagaType);//replace this line with pushing seed to database, format: 0A00, first number represent bagachi type, second number is for ID last 2 represent level
-                string Bcard = Sprites.ShowBagachi(bagachiID); 
-                WriteLine(Bcard);
+                Clear();//replace this line with pushing seed to database, format: 0A00, first number represent bagachi type, second number is for ID last 2 represent level
+                Bagachi myPet = new Bagachi(bagachiID);
+                string display = Sprites.ShowBagachi(myPet);
+                WriteLine(display);
                 WriteLine(">> Click anywhere to enter Main Menu...");
                 ReadLine(); // Pause before clearing
                 Clear();
@@ -120,65 +145,13 @@ namespace Bagachi_Console
             }
         }
 
-        static void MainMenu()
-        {
-            Clear();
-            //WriteLine("==MAIN MENU==");
-            //WriteLine("[1] Option 1");
-            //WriteLine("[2] Option 2");
-            //WriteLine("[0] Log Out");
-            //WriteLine(">> Enter: ");
-            //try
-            //{
-            //    int value = Convert.ToInt32(ReadLine());
-            //    switch (value)
-            //    {
-            //        case 1:
-            //            WriteLine("You selected Option 1.");
-            //            break;
-            //        case 2:
-            //            WriteLine("You selected Option 2.");
-            //            break;
-            //        case 0:
-            //            Main(null);
-            //            break;
-            //        default:
-            //            WriteLine("Invalid option. Please try again.");
-            //            break;
-            //    }
-            //}
-            //catch
-            //{
-            //    WriteLine("Invalid input. Please enter a number.");
-            //}
-        }
 
         static void Main(string[] args)
         {
 
             while (true)
             {
-                WriteLine("==BAGACHI==");
-                WriteLine("[1] Log In");
-                WriteLine("[2] Register");
-                WriteLine("[0] Exit");
-                WriteLine(">> Enter: ");
-                int value = Convert.ToInt32(ReadLine());
-                switch (value)
-                {
-                    case 1:
-                        LogIn();
-                        break;
-                    case 2:
-                        Register();
-                        break;
-                    case 0:
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        WriteLine("Invalid option. Please try again.");
-                        break;
-                }
+                InitialMenu();
             }
 
 
